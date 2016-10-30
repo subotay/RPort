@@ -34,6 +34,11 @@ public class GameController : MonoBehaviour {
 		Application.Quit ();
 	}
 
+    public void mmenu() {
+        SceneManager.UnloadScene("Play");
+        SceneManager.LoadScene("Start");
+    }
+
 	void OnLevelWasLoaded(int index){
 		string loadedScene = SceneManager.GetActiveScene ().name;
 		Debug.Log ("Loaded scene: "+ loadedScene);

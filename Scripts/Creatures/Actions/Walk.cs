@@ -61,10 +61,10 @@ namespace Assets.Scripts.Creaturi.States
             }
 
             //muta monstru+ update cells
-            level.cells[(int)creature.transform.position.x, (int)creature.transform.position.y] &= ~LevelMaster.CellFlag.MONST;
-            level.cells[(int)creature.dest.x, (int)creature.dest.y] |= LevelMaster.CellFlag.MONST;
-            creature.pos = creature.dest;
+            //level.cells[(int)creature.transform.position.x, (int)creature.transform.position.y] &= ~LevelMaster.CellFlag.MONST;
+            //level.cells[(int)creature.dest.x, (int)creature.dest.y] |= LevelMaster.CellFlag.MONST;
             creature.steering.move(creature.walkDir.x, creature.walkDir.y);
+            //creature.pos = creature.dest;
             return true;
         }
     }

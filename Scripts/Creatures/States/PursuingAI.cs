@@ -13,7 +13,6 @@ namespace Assets.Scripts.Creatures.States {
 
         public override void act() {
             npc.steering.seek(npc.target); //if (loc.Equals(Vector2.down))
-            npc.actM.set("walk");
         }
 
         public override void enterState() {

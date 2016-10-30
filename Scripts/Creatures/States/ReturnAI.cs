@@ -11,7 +11,6 @@ namespace Assets.Scripts.Creatures.States {
 
         public override void act() {
             npc.steering.walkTo(npc.home);
-            npc.actM.set("walk");
         }
 
         public override void enterState() {

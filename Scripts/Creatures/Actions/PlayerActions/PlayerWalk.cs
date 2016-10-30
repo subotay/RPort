@@ -61,7 +61,7 @@ namespace Assets.Scripts.Creaturi.States.PlayerStates
             //nimic nu bloc.
             level.cells[(int)player.transform.position.x, (int)player.transform.position.y] &= ~LevelMaster.CellFlag.HERO;
             level.cells[(int)player.dest.x, (int)player.dest.y] |= LevelMaster.CellFlag.HERO;
-            player.pos = player.dest;
+            //player.pos = player.dest;
             player.steering.move(player.walkDir.x, player.walkDir.y);
             return true;
         }

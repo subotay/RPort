@@ -21,15 +21,23 @@ public class Player : Assets.Scripts.Creaturi.Creature
 	
 	// Update is called once per frame
 	protected override void Update () {
-		float dx = Input.GetAxisRaw("Horizontal");
-        float dy = Input.GetAxisRaw("Vertical"); 
-        if (!(dx==0 && dy==0) && level.phase == LevelMaster.TurnPhase.WAITING && steering.isMoving == false) {
-            walkDir.x = dx;
-            walkDir.y = dy;
-            actM.set("walk");
-            if (level.phase == LevelMaster.TurnPhase.WAITING /*&& steering.isMoving == false*/)
-                level.phase = LevelMaster.TurnPhase.START_PLAYER;
-		}
+		
+        if (level.phase == LevelMaster.TurnPhase.WAITING && steering.isMoving == false) {
+            float dx = Input.GetAxisRaw("Horizontal");
+            float dy = Input.GetAxisRaw("Vertical");
+            float dz = Input.GetAxisRaw("Jump");
+            if (!(dx == 0 && dy == 0)) {
+                walkDir.x = dx;
+                walkDir.y = dy;
+                actM.set("walk");
+                if (level.phase == LevelMaster.TurnPhase.WAITING /*&& steering.isMoving == false*/)
+                    level.phase = LevelMaster.TurnPhase.START_PLAYER;
+            } else if (dz != 0) {
+                actM.set("idle");
+                if (level.phase == LevelMaster.TurnPhase.WAITING /*&& steering.isMoving == false*/)
+                    level.phase = LevelMaster.TurnPhase.START_PLAYER;
+            }
+        }
    }
 
 	public void interractDoor(Vector2 pos){}

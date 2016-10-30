@@ -10,7 +10,17 @@ namespace Assets.Scripts.Creaturi
 
         public Steering steering;
         public Vector2 walkDir;
-        public Vector2 home, pos,dest;
+        public Vector2 home, dest;
+
+        private Vector2 _pos = new Vector2();
+        public Vector2 pos {
+            get {
+                _pos.x = (int)transform.position.x;
+                _pos.y = (int)transform.position.y;
+                return _pos;
+            }
+            set { }
+        }
         
         [HideInInspector]public ActionMachine actM;
         public LevelMaster level;
@@ -29,7 +39,7 @@ namespace Assets.Scripts.Creaturi
             actM = gameObject.GetComponent<ActionMachine>();
             level = GameObject.Find("LevelMaster").GetComponent<LevelMaster>();
             target = null;
-            pos = new Vector2(transform.position.x, transform.position.y);
+            //pos = new Vector2(transform.position.x, transform.position.y);
             dest = new Vector2(transform.position.x, transform.position.y);
             actM.idle = true;
         }

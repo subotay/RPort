@@ -61,7 +61,7 @@ public class LevelMaster : MonoBehaviour {
 		if (phase == TurnPhase.START_PLAYER) 
 			processPlayer ();
 		else if (phase == TurnPhase.START_OTHERS)
-			StartCoroutine (processOthers ());
+			processOthers ();
 	}
 
 	void processPlayer(){
@@ -78,10 +78,9 @@ public class LevelMaster : MonoBehaviour {
         }
 		//update AI target, lastHitter TODO
 		phase = TurnPhase.START_OTHERS;
-		//yield return null;
 	}
 
-	IEnumerator processOthers(){
+	void processOthers(){
 		phase = TurnPhase.PROC_OTHERS;
 		foreach (Npc npc in npcs) {
             npc.attrs.energ += TICKS-5;
@@ -89,16 +88,14 @@ public class LevelMaster : MonoBehaviour {
             {
                 Debug.Log("npc energ:: " + npc.attrs.energ);
                 npc.stateM.updateState();
-                bool done = npc.actM.processAct();
+                bool done = false;
                 while (!done)
-                    npc.actM.processAct();
-                //yield return null;
+                    done = npc.actM.processAct();
                 npc.attrs.energ -= /*npc.actM.cost*/ COST;
                 npc.actM.idle = true;
             }
         }
-		phase = player.actM.idle ? TurnPhase.WAITING : TurnPhase.START_PLAYER;
-		yield return null;
+        phase = player.actM.idle ? TurnPhase.WAITING : TurnPhase.START_PLAYER;
 	}
 
 	public void randomGeneration(){
