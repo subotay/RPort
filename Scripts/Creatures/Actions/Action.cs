@@ -8,12 +8,12 @@ namespace Assets.Scripts.Creaturi
 {
     public abstract class Action
     {
-        protected Creature creature;
+        protected Creature actor;
         protected LevelMaster level;
         public int cost;
 
         public Action(Creature creature) {
-            this.creature = creature;
+            this.actor = creature;
             level = GameObject.Find("LevelMaster").GetComponent<LevelMaster>();
         }
         public abstract void enterAction();

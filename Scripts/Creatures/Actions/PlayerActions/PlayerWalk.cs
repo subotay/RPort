@@ -28,7 +28,6 @@ namespace Assets.Scripts.Creaturi.States.PlayerStates
         public override bool execute() {
             player.dest.x = (int)player.transform.position.x + player.walkDir.x;
             player.dest.y = (int)player.transform.position.y + player.walkDir.y;
-            //player.dest = player.pos + player.walkDir;
             if (player.dest.x >= player.level.worldw || player.dest.x < 0 || player.dest.y < 0 || player.dest.y >= level.worldh)
             {
                 return true;
@@ -59,9 +58,6 @@ namespace Assets.Scripts.Creaturi.States.PlayerStates
             }
                 
             //nimic nu bloc.
-            level.cells[(int)player.transform.position.x, (int)player.transform.position.y] &= ~LevelMaster.CellFlag.HERO;
-            level.cells[(int)player.dest.x, (int)player.dest.y] |= LevelMaster.CellFlag.HERO;
-            //player.pos = player.dest;
             player.steering.move(player.walkDir.x, player.walkDir.y);
             return true;
         }

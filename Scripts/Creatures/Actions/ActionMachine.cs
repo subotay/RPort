@@ -23,6 +23,8 @@ namespace Assets.Scripts.Creaturi.States
             acts = new Dictionary<string, Action>();
             creature = gameObject.GetComponent<Creature>();
             acts.Add("idle", new Idle(creature));
+            //acts.Add("walk", new Walk(creature)); //playerwalk vs walk
+            acts.Add("atk", new Attack(creature));
             action = acts["idle"];
             prevAction = acts["idle"];
         }

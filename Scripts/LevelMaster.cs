@@ -43,13 +43,13 @@ public class LevelMaster : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		player = GameObject.FindGameObjectWithTag ("Player").GetComponent<Player> ();
-        cells[(int)player.pos.x, (int)player.pos.y] |= CellFlag.HERO;
-        npcs = new List<Npc>();
-        GameObject[] npcarr = GameObject.FindGameObjectsWithTag("npc");
-        foreach (GameObject npc in npcarr) {
-            npcs.Add(npc.GetComponent<Npc>());
-        }
+		//player = GameObject.FindGameObjectWithTag ("Player").GetComponent<Player> ();
+  //      cells[(int)player.pos.x, (int)player.pos.y] |= CellFlag.HERO;
+  //      npcs = new List<Npc>();
+  //      GameObject[] npcarr = GameObject.FindGameObjectsWithTag("npc");
+  //      foreach (GameObject npc in npcarr) {
+  //          npcs.Add(npc.GetComponent<Npc>());
+  //      }
     }
 	
 	// Update is called once per frame
@@ -138,7 +138,17 @@ public class LevelMaster : MonoBehaviour {
 			cells [(int)tranz.transform.position.x, (int)tranz.transform.position.y] |= CellFlag.TRIGG;
 		}
         destroyRedundantObjects ();
-	}
+        
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        cells[(int)player.pos.x, (int)player.pos.y] |= CellFlag.HERO;
+        npcs = new List<Npc>();
+        GameObject[] npcarr = GameObject.FindGameObjectsWithTag("npc");
+        foreach (GameObject npc in npcarr) {
+            var n = npc.GetComponent<Npc>();
+            npcs.Add(n);
+            cells[(int)n.pos.x, (int)n.pos.y] |= CellFlag.NPC;
+        }
+    }
 
 	void destroyRedundantObjects(){
 		//

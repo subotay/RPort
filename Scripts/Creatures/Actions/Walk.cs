@@ -12,26 +12,19 @@ namespace Assets.Scripts.Creaturi.States
             cost = 100;
         }
 
-        public override void enterAction() {
-            //Debug.Log("entered walk");
-            //Debug.Log("     >>creature energ:: " + creature.attrs.energ);
-            //creature.attrs.energ-= creature.actM.prevAction.cost;
-        }
+        public override void enterAction() {}
 
-        public override void exitAction() {
-            //Debug.Log("exited walk");
-            //Debug.Log("     >>creature energ:: " + creature.attrs.energ);
-        }
+        public override void exitAction() {}
 
         public override bool execute() {
-            creature.dest.x = (int)creature.transform.position.x + creature.walkDir.x;//  creature.pos + creature.walkDir;
-            creature.dest.y = (int)creature.transform.position.y + creature.walkDir.y;
-            if (creature.dest.x >= level.worldw || creature.dest.x < 0 || creature.dest.y < 0 || creature.dest.y >= level.worldh)
+            actor.dest.x = (int)actor.transform.position.x + actor.walkDir.x;//  actor.pos + actor.walkDir;
+            actor.dest.y = (int)actor.transform.position.y + actor.walkDir.y;
+            if (actor.dest.x >= level.worldw || actor.dest.x < 0 || actor.dest.y < 0 || actor.dest.y >= level.worldh)
             {
                 return true;
             }
             
-            LevelMaster.CellFlag cell = level.cells[(int)creature.dest.x, (int)creature.dest.y];
+            LevelMaster.CellFlag cell = level.cells[(int)actor.dest.x, (int)actor.dest.y];
             if ((cell & LevelMaster.CellFlag.BLOCKMV) != 0) {
                 return true;
             }
@@ -61,10 +54,7 @@ namespace Assets.Scripts.Creaturi.States
             }
 
             //muta monstru+ update cells
-            //level.cells[(int)creature.transform.position.x, (int)creature.transform.position.y] &= ~LevelMaster.CellFlag.MONST;
-            //level.cells[(int)creature.dest.x, (int)creature.dest.y] |= LevelMaster.CellFlag.MONST;
-            creature.steering.move(creature.walkDir.x, creature.walkDir.y);
-            //creature.pos = creature.dest;
+            actor.steering.move(actor.walkDir.x, actor.walkDir.y);
             return true;
         }
     }

@@ -9,7 +9,7 @@ namespace Assets.Scripts.Creatures.States {
         }
 
         public override void act() {
-            npc.actM.set("idle");
+            npc.actM.set("atk");
         }
 
         public override void enterState() {
@@ -21,7 +21,7 @@ namespace Assets.Scripts.Creatures.States {
         }
 
         public override void reason() {
-            if ((npc.target == null) || (!npc.hasFovTo(npc.target))) {
+            if (!npc.hasTarget() || !npc.hasFovTo(npc.target)) {
                 npc.stateM.changeState("rest");
                 return;
             }

@@ -103,30 +103,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b9e695c403a2fe408b517d15eac1c8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ARMOR: 0
-  BONDMG: 0
-  HIT: 0
-  EVA: 0
+  ARMOR: 10
+  DMG_BON: 0
+  HIT: 10
+  EVA: 5
   CRIT: 0
-  MHP: 0
-  HPREG: 0
-  MSTAM: 0
+  HP_BON: 0
+  HPREG: 3
+  STAM_BON: 5
   STAREG: 0
-  FATK: 0
-  FRES: 0
-  EATK: 0
-  ERES: 0
-  STR: 0
-  AGI: 0
-  VIT: 0
-  END: 0
+  STR: 5
+  AGI: 5
+  VIT: 10
+  END: 5
   SPI: 0
-  hp: 101
-  stam: 0
+  health:
+    bar: {fileID: 0}
+    maxVal: 100
+    val: 100
+  stamina:
+    bar: {fileID: 0}
+    maxVal: 15
+    val: 15
   accHp: 0
   accStam: 0
   energ: 0
-  atkcost: 0
+  atkcost: 100
   melee: 1
   dumb: 0
   range: 1
@@ -158,7 +160,7 @@ MonoBehaviour:
   attrs: {fileID: 114000011639080066}
   steering: {fileID: 0}
   walkDir: {x: 0, y: 0}
-  home: {x: 28, y: 27}
+  home: {x: 16, y: 27}
   dest: {x: 0, y: 0}
   actM: {fileID: 114000013432448994}
   level: {fileID: 0}

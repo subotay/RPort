@@ -11,6 +11,7 @@ namespace Assets.Scripts.Creatures.States {
 
 
         public override void enterState() {
+            npc.target = null;
             act();
         }
 
@@ -20,7 +21,7 @@ namespace Assets.Scripts.Creatures.States {
 
         public override void reason() {
             Creature targ = npc.scanFov();
-            if ((targ != null) && (npc.attrs.dumb || npc.strongerThan(targ))) {
+            if (targ != null && (npc.attrs.dumb || npc.strongerThan(targ))) {
                 npc.target = targ;
                 if (npc.hasRangeTo(targ))
                     npc.stateM.changeState("combat");

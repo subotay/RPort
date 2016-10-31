@@ -39,7 +39,6 @@ namespace Assets.Scripts.Creaturi
             actM = gameObject.GetComponent<ActionMachine>();
             level = GameObject.Find("LevelMaster").GetComponent<LevelMaster>();
             target = null;
-            //pos = new Vector2(transform.position.x, transform.position.y);
             dest = new Vector2(transform.position.x, transform.position.y);
             actM.idle = true;
         }
@@ -61,14 +60,25 @@ namespace Assets.Scripts.Creaturi
         }
 
         public Creature scanFov() {     //TODO fov
-            if (this.hasFovTo(level.player))
+            if (this.hasFovTo(level.player) && !isFriend(level.player) && !level.player.dead)
                 return level.player;
             else
                 return null;
         }
 
         public bool strongerThan(Creature c) {
-            return attrs.hp > c.attrs.hp;
+            return attrs.hp.Val >=  c.attrs.hp.Val;
+        }
+
+        public bool hasTarget() {
+            return (target != null && target.dead == false);
+        }
+
+        public virtual void onDeath() {
+            attrs.hp.Val = 0;
+            dead = true;
+            level.cells[(int)pos.x, (int)pos.y] &= ~LevelMaster.CellFlag.NPC;
+            level.npcs.Remove((Npc)this);
         }
     }
 }

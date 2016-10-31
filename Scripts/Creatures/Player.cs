@@ -23,6 +23,10 @@ public class Player : Assets.Scripts.Creaturi.Creature
 	protected override void Update () {
 		
         if (level.phase == LevelMaster.TurnPhase.WAITING && steering.isMoving == false) {
+            if (Input.GetKeyDown(KeyCode.Q))
+                attrs.hp.Val -= 10;
+            if (Input.GetKeyDown(KeyCode.E))
+                attrs.hp.Val += 10;
             float dx = Input.GetAxisRaw("Horizontal");
             float dy = Input.GetAxisRaw("Vertical");
             float dz = Input.GetAxisRaw("Jump");
@@ -41,4 +45,11 @@ public class Player : Assets.Scripts.Creaturi.Creature
    }
 
 	public void interractDoor(Vector2 pos){}
+
+    public override void onDeath() {
+        attrs.hp.Val = 0;
+        dead = true;
+        level.cells[(int)pos.x, (int)pos.y] &= ~LevelMaster.CellFlag.HERO;
+        //TODO game over 
+    }
 }

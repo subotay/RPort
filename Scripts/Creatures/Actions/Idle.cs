@@ -5,41 +5,33 @@ using System.Text;
 
 namespace Assets.Scripts.Creaturi.States
 {
-    class Idle : Action
-    {
+    class Idle : Action{
         
-        public Idle(Creature creature) : base(creature)
-        {
+        public Idle(Creature creature) : base(creature){
             cost = 100;
         }
 
-        public override void enterAction()
-        {
-            
-        }
+        public override void enterAction(){}
 
-        public override void exitAction()
-        {
-            
-        }
+        public override void exitAction(){}
 
         public override bool execute(){
-            if (creature.attrs.hp < creature.attrs.mhp()){
-                creature.attrs.accHp += creature.attrs.hpreg();
-                creature.attrs.hp += (float)Math.Floor(creature.attrs.accHp);
-                creature.attrs.accHp -= (float)Math.Floor(creature.attrs.accHp);
-                if (creature.attrs.hp >= creature.attrs.mhp()){
-                    creature.attrs.hp = creature.attrs.mhp();
-                    creature.attrs.accHp = 0;
+            if (actor.attrs.hp.Val < actor.attrs.hp.MaxVal){
+                actor.attrs.accHp += actor.attrs.hpreg.Val;
+                actor.attrs.hp.Val += (float)Math.Floor(actor.attrs.accHp);
+                actor.attrs.accHp -= (float)Math.Floor(actor.attrs.accHp);
+                if (actor.attrs.hp.Val >= actor.attrs.hp.MaxVal){
+                    actor.attrs.hp.Val = actor.attrs.hp.MaxVal;
+                    actor.attrs.accHp = 0;
                 }
             }
-            if (creature.attrs.stam < creature.attrs.mstam()){
-                creature.attrs.accStam += creature.attrs.stareg();
-                creature.attrs.stam += (float)Math.Floor(creature.attrs.accStam);
-                creature.attrs.accStam -= (float)Math.Floor(creature.attrs.accStam);
-                if (creature.attrs.stam >= creature.attrs.mstam()){
-                    creature.attrs.stam = creature.attrs.mstam();
-                    creature.attrs.accStam = 0;
+            if (actor.attrs.stam.Val < actor.attrs.stam.MaxVal){
+                actor.attrs.accStam += actor.attrs.stareg.Val;
+                actor.attrs.stam.Val += (float)Math.Floor(actor.attrs.accStam);
+                actor.attrs.accStam -= (float)Math.Floor(actor.attrs.accStam);
+                if (actor.attrs.stam.Val >= actor.attrs.stam.MaxVal){
+                    actor.attrs.stam.Val = actor.attrs.stam.MaxVal;
+                    actor.attrs.accStam = 0;
                 }
             }
             return true;

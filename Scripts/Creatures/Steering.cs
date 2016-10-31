@@ -30,15 +30,15 @@ public class Steering : MonoBehaviour {
 		direction.x = dx;
 		direction.y = dy;
 
-        //sprite.parent = null;
         //transform.position = new Vector3(transform.position.x + direction.x, transform.position.y + direction.y, 0);
         StartCoroutine(moving());
     }
 
 	private IEnumerator moving(){
         isMoving = true;
-        level.cells[(int)creature.transform.position.x, (int)creature.transform.position.y] &= ~LevelMaster.CellFlag.MONST;
-        level.cells[(int)creature.dest.x, (int)creature.dest.y] |= LevelMaster.CellFlag.MONST;
+        LevelMaster.CellFlag type = (creature.GetType() == typeof(Player)) ? LevelMaster.CellFlag.HERO : LevelMaster.CellFlag.NPC;
+        level.cells[(int)creature.transform.position.x, (int)creature.transform.position.y] &= ~type;
+        level.cells[(int)creature.dest.x, (int)creature.dest.y] |= type;
 
 		Vector3 startPos = transform.position;
 		Vector3 endPos = new Vector3 (startPos.x + direction.x, startPos.y + direction.y, 0);
